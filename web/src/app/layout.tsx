@@ -9,7 +9,7 @@ import {
 import { Blur } from '@/components/Blur'
 import { Stripes } from '@/components/Stripes'
 import { Account } from '@/components/Account'
-import { LinkButton } from '@/components/Button'
+import { Hero } from '@/components/Hero'
 
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-roboto' })
 const baiJamjuree = BaiJamjuree({
@@ -37,22 +37,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
             <Account />
 
-            <div className="space-y-5">
-              <div className="max-w-[420px] space-y-1">
-                <h1 className=" text-[40px] font-bold leading-tight text-gray-50">
-                  Sua cápsula do tempo
-                </h1>
-                <p
-                  className="text-lg leading-relaxed
-            "
-                >
-                  Colecione momentos marcantes da sua jornada e compartilhe (se
-                  quiser) com o mundo!
-                </p>
-              </div>
-
-              <LinkButton href="/" title="cadastrar lembrança" />
-            </div>
+            <Hero />
           </div>
 
           {children}
