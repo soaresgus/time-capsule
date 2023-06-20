@@ -16,7 +16,7 @@ export function Hero() {
         </p>
       </div>
 
-      <LinkButton href="/" title="cadastrar lembrança" />
+      <LinkButton href="/memories/new" title="cadastrar lembrança" />
     </div>
   )
 }

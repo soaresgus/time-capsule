@@ -40,7 +40,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Hero />
           </div>
 
-          {children}
+          <div className="flex flex-col bg-[url(../assets/bg-stars.svg)] bg-cover p-16">
+            {children}
+          </div>
         </main>
       </body>
     </html>
