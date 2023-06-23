@@ -23,6 +23,7 @@ export default function NewMemory() {
   const { bottom, top } = useSafeAreaInsets()
 
   const [content, setContent] = useState('')
+  const [contentError, setContentError] = useState(false)
   const [isPublic, setIsPublic] = useState(false)
   const [preview, setPreview] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -44,6 +45,12 @@ export default function NewMemory() {
   }
 
   async function handleCreateMemory() {
+    setContentError(false)
+    if (content === '') {
+      setContentError(true)
+      return
+    }
+
     setIsLoading(true)
     const token = await SecureStore.getItemAsync('token')
 
@@ -84,6 +91,9 @@ export default function NewMemory() {
 
     setIsLoading(false)
     router.push('/memories')
+    setContent('')
+    setIsPublic(false)
+    setPreview(null)
   }
 
   return (
@@ -141,13 +151,24 @@ export default function NewMemory() {
           textAlignVertical="top"
           cursorColor="#fff"
           value={content}
-          onChangeText={setContent}
+          onChangeText={(value) => {
+            setContent(value)
+            setContentError(false)
+          }}
           placeholder="Fique livre para adicionar fotos, vídeos e relatos sobre essa experiência que você quer lembrar para sempre."
         />
 
+        {contentError && (
+          <Text className="text-sm leading-tight text-red-500">
+            O conteúdo é obrigatório
+          </Text>
+        )}
+
         <TouchableOpacity
           activeOpacity={0.7}
-          className="items-center self-end rounded-full bg-green-500 px-5 py-2 disabled:bg-green-800"
+          className={`items-center self-end rounded-full bg-green-500 px-5 py-2 ${
+            isLoading && 'bg-green-800'
+          }`}
           onPress={handleCreateMemory}
           disabled={isLoading}
         >
