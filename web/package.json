@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
+    "@radix-ui/react-popover": "^1.0.6",
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
+    "@vkbansal/react-date-primitives": "^4.0.0-beta.1",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "dayjs": "^1.11.8",

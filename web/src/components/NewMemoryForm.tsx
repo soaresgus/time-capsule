@@ -3,12 +3,14 @@
 import { Camera } from 'lucide-react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { MediaPicker } from './MediaPicker'
 import { FormProvider, useForm } from 'react-hook-form'
 import cookie from 'js-cookie'
-import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+
+import { DatePicker } from './DatePicker'
+import { MediaPicker } from './MediaPicker'
+import { api } from '@/lib/api'
 
 const createMemoryFormSchema = z.object({
   media: z
@@ -23,6 +25,7 @@ type createMemoryFormData = z.infer<typeof createMemoryFormSchema>
 
 export function NewMemoryForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date())
 
   const router = useRouter()
 
@@ -60,6 +63,7 @@ export function NewMemoryForm() {
         coverUrl,
         content: data.content,
         isPubic: data.isPublic,
+        createdAt: selectedDate,
       },
       {
         headers: {
@@ -69,7 +73,7 @@ export function NewMemoryForm() {
     )
 
     setIsLoading(false)
-    router.push('/')
+    router.push('/', { shallow: true })
   }
 
   return (
@@ -99,6 +103,11 @@ export function NewMemoryForm() {
             />
             Tornar memória pública
           </label>
+
+          <DatePicker
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
         </div>
 
         <MediaPicker name="media" />
