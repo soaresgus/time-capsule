@@ -36,7 +36,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="relative flex h-screen flex-col gap-10 overflow-auto p-8">
+    <div className="relative flex flex-col gap-10 p-8">
       {memories.map((memory) => (
         <div key={memory.id} className="space-y-4">
           <time className="-ml-8 flex items-center gap-2 text-sm text-gray-100 before:h-px before:w-5 before:bg-gray-50">
