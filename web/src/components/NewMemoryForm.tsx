@@ -62,7 +62,7 @@ export function NewMemoryForm() {
       {
         coverUrl,
         content: data.content,
-        isPubic: data.isPublic,
+        isPublic: data.isPublic,
         createdAt: selectedDate,
       },
       {
@@ -73,7 +73,7 @@ export function NewMemoryForm() {
     )
 
     setIsLoading(false)
-    router.push('/', { shallow: true })
+    router.push('/', { revalidate: true })
   }
 
   return (
