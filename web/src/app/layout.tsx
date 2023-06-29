@@ -10,6 +10,7 @@ import { Blur } from '@/components/Blur'
 import { Stripes } from '@/components/Stripes'
 import { Account } from '@/components/Account'
 import { Hero } from '@/components/Hero'
+import { Providers } from '@/providers'
 
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-roboto' })
 const baiJamjuree = BaiJamjuree({
@@ -40,9 +41,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Hero />
           </div>
 
-          <div className="flex h-screen flex-col overflow-auto bg-[url(../assets/bg-stars.svg)] bg-cover">
-            {children}
-          </div>
+          <Providers>
+            <div className="flex h-screen flex-col overflow-auto bg-[url(../assets/bg-stars.svg)] bg-cover">
+              {children}
+            </div>
+          </Providers>
         </main>
       </body>
     </html>

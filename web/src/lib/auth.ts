@@ -1,11 +1,6 @@
 import { cookies } from 'next/headers'
 import decode from 'jwt-decode'
-
-interface User {
-  sub: string
-  name: string
-  avatarUrl: string
-}
+import { User } from '@/types/user'
 
 export function getUser(): User {
   const token = cookies().get('token')?.value
