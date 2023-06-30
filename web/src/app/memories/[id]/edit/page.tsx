@@ -39,7 +39,7 @@ export default function Memory({ params: { id } }: IPageParams) {
   const router = useRouter()
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-  const [media, setMedia] = useState<File | null>(null)
+  const [coverUrl, setCoverUrl] = useState<string | null>(null)
   const [isPublic, setIsPublic] = useState<boolean | null>(null)
   const [content, setContent] = useState<string | null>(null)
 
@@ -56,21 +56,6 @@ export default function Memory({ params: { id } }: IPageParams) {
 
   async function handleSaveChanges() {
     setEditIsLoading(true)
-
-    let coverUrl: string | null = null
-
-    if (media) {
-      const formData = new FormData()
-      formData.append('media', media)
-
-      const request = await api.post('/upload', formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-
-      coverUrl = request.data as string
-    }
 
     const contentData = content ?? memory?.content
     const coverUrlData = coverUrl ?? memory?.coverUrl
@@ -93,6 +78,7 @@ export default function Memory({ params: { id } }: IPageParams) {
     )
 
     setEditIsLoading(false)
+    router.prefetch(`/memories/${id}`)
     router.push(`/memories/${id}`)
   }
 
@@ -135,7 +121,7 @@ export default function Memory({ params: { id } }: IPageParams) {
         <EditMemoryHeader
           selectedDate={selectedDate ?? dayjs(memory.createdAt).toDate()}
           setSelectedDate={setSelectedDate}
-          setMedia={setMedia}
+          setCoverUrl={setCoverUrl}
           setIsPublic={setIsPublic}
           isPublic={isPublic ?? memory.isPublic}
           isLoading={editIsLoading}
@@ -143,7 +129,7 @@ export default function Memory({ params: { id } }: IPageParams) {
         />
       )}
 
-      {!media && memory.coverUrl && (
+      {!coverUrl && memory.coverUrl && (
         <Image
           src={memory.coverUrl}
           width={592}
@@ -153,9 +139,9 @@ export default function Memory({ params: { id } }: IPageParams) {
         />
       )}
 
-      {media && (
+      {coverUrl && (
         <Image
-          src={URL.createObjectURL(media)}
+          src={coverUrl}
           width={592}
           height={280}
           alt=""

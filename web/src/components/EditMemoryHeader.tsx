@@ -1,15 +1,14 @@
 'use client'
 
-import { Camera } from 'lucide-react'
 import { DatePicker } from './DatePicker'
-import { ChangeEvent } from 'react'
+import { MediaPicker } from './MediaPicker'
 
 interface IEditMemoryHeaderProps {
   selectedDate: Date
   isPublic?: boolean
   isLoading?: boolean
   setSelectedDate: (date: Date) => void
-  setMedia: (file: File) => void
+  setCoverUrl: (string: string) => void
   setIsPublic: (isPublic: boolean) => void
   handleSaveChanges: () => void
 }
@@ -17,25 +16,16 @@ interface IEditMemoryHeaderProps {
 export function EditMemoryHeader({
   selectedDate,
   setSelectedDate,
-  setMedia,
+  setCoverUrl,
   isPublic,
   isLoading,
   setIsPublic,
   handleSaveChanges,
 }: IEditMemoryHeaderProps) {
-  function handleChangeFile(event: ChangeEvent<HTMLInputElement>) {
-    setMedia(event.target.files![0])
-  }
-
   return (
     <div className="flex items-center gap-4">
-      <label
-        htmlFor="media"
-        className="flex cursor-pointer items-center gap-1.5 text-sm text-gray-200 hover:text-gray-100"
-      >
-        <Camera className="h-4 w-4" />
-        Editar mídia
-      </label>
+      <MediaPicker setUrl={setCoverUrl} />
+
       <label
         htmlFor="isPublic"
         className="flex cursor-pointer items-center gap-1.5 text-sm text-gray-200 hover:text-gray-100"
@@ -63,14 +53,6 @@ export function EditMemoryHeader({
       >
         SALVAR
       </button>
-
-      <input
-        id="media"
-        type="file"
-        className="invisible h-0 w-0"
-        accept="image/*"
-        onChange={handleChangeFile}
-      />
     </div>
   )
 }

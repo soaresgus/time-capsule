@@ -42,6 +42,7 @@ export default async function Memory({ params: { id } }: IPageParams) {
       </time>
       <Link
         href="/"
+        prefetch
         className="flex items-center gap-1 text-sm text-gray-200 hover:text-gray-100"
       >
         <ChevronLeft className="h-4 w-4" />
