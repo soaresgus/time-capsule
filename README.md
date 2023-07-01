@@ -40,6 +40,10 @@
 - <a href="https://fastify.dev/">Fastify</a> (Framework BACKEND)
 - Entre outros...
 
+## 🎨 Design/Protótipo
+
+- Acesse <a href="https://www.figma.com/file/VbtEWg4OG6Qgv3emkRmW67/C%C3%A1psula-do-tempo-%E2%80%A2-Trilha-Ignite-(Community)?type=design&node-id=205%3A3&mode=design&t=WQR2oezjQxQb6wdt-1">clicando aqui</a>
+
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
